@@ -1,22 +1,36 @@
-// import necessary react testing library helpers here
-// import the Counter component here
+import { render, screen, fireEvent } from '@testing-library/react';
+import Counter from '../components/Counter';
+import '@testing-library/jest-dom'
 
 beforeEach(() => {
-  // Render the Counter component here
+  render(<Counter />);
 })
 
 test('renders counter message', () => {
-  // Complete the unit test below based on the objective in the line above
+  const counter = screen.getByText(/Counter/i);
+  expect(counter).toBeInTheDocument();
 });
 
 test('should render initial count with value of 0', () => {
-  // Complete the unit test below based on the objective in the line above
+  expect(screen.getByTestId("count")).toHaveTextContent("0")
 });
 
 test('clicking + increments the count', () => {
-  // Complete the unit test below based on the objective in the line above
+  expect(screen.getByTestId("count")).toHaveTextContent("0")
+  fireEvent.click(screen.getByRole('button', {name: "+"}))
+  expect(screen.getByTestId("count")).toHaveTextContent("1")
+  fireEvent.click(screen.getByRole('button', {name: "+"}))
+  expect(screen.getByTestId("count")).toHaveTextContent("2")
+  fireEvent.click(screen.getByRole('button', {name: "+"}))
+  expect(screen.getByTestId("count")).toHaveTextContent("3")
 });
 
 test('clicking - decrements the count', () => {
-  // Complete the unit test below based on the objective in the line above
+  expect(screen.getByTestId("count")).toHaveTextContent("0")
+  fireEvent.click(screen.getByRole('button', {name: "-"}))
+  expect(screen.getByTestId("count")).toHaveTextContent("-1")
+  fireEvent.click(screen.getByRole('button', {name: "-"}))
+  expect(screen.getByTestId("count")).toHaveTextContent("-2")
+  fireEvent.click(screen.getByRole('button', {name: "-"}))
+  expect(screen.getByTestId("count")).toHaveTextContent("-3")
 });
